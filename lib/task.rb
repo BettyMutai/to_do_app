@@ -1,4 +1,5 @@
 class Task
+    @@all_tasks = []
     define_method(:initialize) do |description|
         @description=description
     end
@@ -8,14 +9,15 @@ class Task
     end
 
     define_singleton_method(:all) do
-      []
+       @@all_tasks
+    end
+
+    define_method(:save) do
+      @@all_tasks.push(self)
+    end
+
+    define_singleton_method(:clear) do
+      @@all_tasks = []
     end
 end
 
-  describe("#save") do
-    it("adds a task to the array of saved tasks") do
-      test_task = Task.new("wash the lion")
-      test_task.save()
-      expect(Task.all()).to(eq([test_task]))
-    end
-  end
