@@ -1,12 +1,12 @@
 require('rspec')
-  require('task')
+require('task')
 
   describe(Task) do
     before() do
       Task.clear()
     end
 
-    describe(#description) do
+    describe('#description') do
       it("lets you read the description out") do
         test_task = Task.new("scrub the zebra")
         expect(test_task.description()).to(eq("scrub the zebra"))
