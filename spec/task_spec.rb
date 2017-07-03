@@ -9,3 +9,9 @@ describe(Task) do
    end
  end
 end
+
+describe(".all") do
+    it("is empty at first") do
+      expect(Task.all()).to(eq([]))
+    end
+  end
