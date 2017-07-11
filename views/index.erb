@@ -1,19 +1,37 @@
-<h1>To Do</h1>
+<h1>Welcome to the To Do App</h1>
 
-  <p>Here are all your tasks:</p>
+<p>Create a new list:</p>
+<form action="/lists" method="post">
+  <label for="name">Assign a name to your list:</label>
+  <input id="name" name="name" type="text">
 
-  <ul>
-    <% @tasks.each() do |task| %>
-      <li><%= task.description() %></li>
+  <button type="submit">Add list</button>
+</form>
+
+<p>Add a task to any list:</p>
+
+<form action="/tasks" method="post">
+  <label for="list_id">Selet a List</label>
+  <select id="list_id" name="list_id" type="text">
+    <% @lists.each() do |list| %>
+      <option value="<%= list.id() %>"><%= list.name() %></option>
     <% end %>
-  </ul>
+  </select>
 
-  <p>Create a new task:</p>
+  <label for="description">Description of the task:</label>
+  <input id="description" type="text" name="description">
 
-  <form action="/tasks" method="post">
-    <label for="description">Task Description</label>
-    <input id="description" name="description" type="text">
+  <button type="submit">Add Task</button>
+</form>
 
-    <button type="submit">Add task</button>
-  </form>
-  
+<% if @lists.any?() %>
+ <p>Click on a list to see its tasks:</p>
+
+ <ul>
+   <% @lists.each do |list| %>
+   <li><a href="/lists/<%= list.id() %>"><%= list.name() %></a></li>
+   <% end %>
+ </ul>
+ <% else %>
+ <p>There are no lists yet!</p>
+ <% end %>
